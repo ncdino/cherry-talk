@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase/firebase";
 
 export default function Login() {
@@ -13,28 +13,37 @@ export default function Login() {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      setError("");
+      setError(null);
     } catch (error) {
-      setError("로그인에 실패했습니다. 다시 확인해주세요");
+      setError("Failed to log in. Please check your credentials.");
     }
   };
+
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
+    <div className="flex flex-col items-center justify-center h-screen">
+      <h2 className="text-2xl font-bold mb-4">Login</h2>
+      <form onSubmit={handleLogin} className="flex flex-col gap-4">
         <input
           type="email"
-          placeholder="이메일"
+          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="p-2 border rounded"
         />
         <input
           type="password"
-          placeholder="패스워드"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          className="p-2 border rounded"
         />
+        <button
+          type="submit"
+          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+        >
+          Login
+        </button>
+        {error && <p className="text-red-500">{error}</p>}
       </form>
     </div>
   );
