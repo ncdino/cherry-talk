@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* styles/globals.css */
 .chat-container {
   max-width: 600px;
   margin: 0 auto;
